@@ -1,0 +1,5 @@
+# JetBrains IDE stuff
+.idea
+
+# JetBrains CMake build dirs
+cmake-build-*
