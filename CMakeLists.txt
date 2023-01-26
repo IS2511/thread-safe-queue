@@ -3,4 +3,10 @@ project(thread_safe_queue)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(thread_safe_queue main.cpp)
+
+add_subdirectory(ts_queue)
+
+
+add_executable(${PROJECT_NAME} main.cpp)
+
+target_link_libraries(${PROJECT_NAME} ts_queue)
