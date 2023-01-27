@@ -37,12 +37,13 @@ jobs:
       
     - name: downcase some vars and get short sha
       run: |
-        echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-        echo "BUILD_TYPE_LOWERCASE=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+        echo "REPO_NAME=${{github.event.repository.name}}" >>${GITHUB_ENV}
+        echo "REPO_NAME_LOWERCASE=${REPO_NAME,,}" >>${GITHUB_ENV}
+        echo "BUILD_TYPE_LOWERCASE=${BUILD_TYPE,,}" >>${GITHUB_ENV}
         echo "SHA_SHORT=$(git rev-parse --short HEAD)" >>${GITHUB_ENV}
       
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{env.REPO}}_${{env.BUILD_TYPE_LOWERCASE}}_${{env.SHA_SHORT}}
+        name: ${{env.REPO_NAME_LOWERCASE}}_${{env.BUILD_TYPE_LOWERCASE}}_${{env.SHA_SHORT}}
         path: ${{github.workspace}}/build
 
