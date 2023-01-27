@@ -36,9 +36,9 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}
       
     - name: downcase some vars and get short sha
+      # echo "REPO_NAME=${{github.event.repository.name}}" >>${GITHUB_ENV}
       run: |
-        echo "REPO_NAME=${{github.event.repository.name}}" >>${GITHUB_ENV}
-        echo "REPO_NAME_LOWERCASE=${REPO_NAME,,}" >>${GITHUB_ENV}
+        echo "REPO_NAME_LOWERCASE=${${{github.event.repository.name}},,}" >>${GITHUB_ENV}
         echo "BUILD_TYPE_LOWERCASE=${BUILD_TYPE,,}" >>${GITHUB_ENV}
         echo "SHA_SHORT=$(git rev-parse --short HEAD)" >>${GITHUB_ENV}
       
