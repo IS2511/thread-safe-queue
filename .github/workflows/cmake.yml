@@ -35,15 +35,14 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
       
-    - name: downcase some vars and get short sha
-      # echo "REPO_NAME=${{github.event.repository.name}}" >>${GITHUB_ENV}
+    - name: prepare some vars
       run: |
-        echo "REPO_NAME_LOWERCASE=${${{github.event.repository.name}},,}" >>${GITHUB_ENV}
+        echo "REPO_NAME=${{github.event.repository.name}}" >>${GITHUB_ENV}
         echo "BUILD_TYPE_LOWERCASE=${BUILD_TYPE,,}" >>${GITHUB_ENV}
         echo "SHA_SHORT=$(git rev-parse --short HEAD)" >>${GITHUB_ENV}
       
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{env.REPO_NAME_LOWERCASE}}_${{env.BUILD_TYPE_LOWERCASE}}_${{env.SHA_SHORT}}
+        name: ${{env.REPO_NAME}}_${{env.BUILD_TYPE_LOWERCASE}}_${{env.SHA_SHORT}}
         path: ${{github.workspace}}/build
 
